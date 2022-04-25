@@ -14,26 +14,31 @@ public class SnakeAndLadder {
         int position = 0, diceNo, options;
 
         while (position <= 100) {
-            diceNo = random.nextInt(6) + 1;
-            System.out.println("Dice value: " + diceNo);
+            if (position == 100)
+                break;
+            else {
+                diceNo = random.nextInt(6) + 1;
+                System.out.println("Dice value: " + diceNo);
 
-            options = random.nextInt(3);
-            switch (options) {
-                case LADDER:
-                    position += diceNo;
-                    break;
-                case SNAKE:
-                    if (position >= 0) {
-                        if (position - diceNo >= 0)
-                            position -= diceNo;
-                        else
-                            position = START_POSITION;
-                    }
-                    break;
-                case NO_PLAY:
-                    break;
+                options = random.nextInt(3);
+                switch (options) {
+                    case LADDER:
+                        if (position+diceNo<=100)
+                            position += diceNo;
+                        break;
+                    case SNAKE:
+                        if (position >= 0) {
+                            if (position - diceNo >= 0)
+                                position -= diceNo;
+                            else
+                                position = START_POSITION;
+                        }
+                        break;
+                    case NO_PLAY:
+                        break;
+                }
+                System.out.println("Player is at position " + position);
             }
-            System.out.println("Player is at position " + position);
         }
     }
 }
